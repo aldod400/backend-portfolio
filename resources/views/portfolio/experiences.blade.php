@@ -28,19 +28,19 @@
                 @foreach($experiences as $experience)
                     <div class="relative flex items-center mb-12 {{ $loop->index % 2 == 0 ? 'md:flex-row-reverse' : '' }}" data-aos="fade-up" data-aos-delay="{{ $loop->index * 200 }}">
                         <!-- Timeline Dot -->
-                        <div class="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-purple-600 dark:bg-purple-500 rounded-full border-4 border-white dark:border-gray-900 shadow-lg z-10"></div>
+                        <div class="absolute {{ app()->getLocale() == 'ar' ? 'right-8 md:right-1/2' : 'left-8 md:left-1/2' }} transform {{ app()->getLocale() == 'ar' ? 'md:translate-x-1/2' : 'md:-translate-x-1/2' }} w-4 h-4 bg-purple-600 dark:bg-purple-500 rounded-full border-4 border-white dark:border-gray-900 shadow-lg z-10"></div>
                         
                         <!-- Content Card -->
-                        <div class="ml-20 md:ml-0 md:w-5/12 {{ $loop->index % 2 == 0 ? 'md:mr-auto md:pl-8' : 'md:ml-auto md:pr-8' }}">
+                        <div class="{{ app()->getLocale() == 'ar' ? 'mr-20 md:mr-0' : 'ml-20 md:ml-0' }} md:w-5/12 {{ $loop->index % 2 == 0 ? (app()->getLocale() == 'ar' ? 'md:ml-auto md:pr-8' : 'md:mr-auto md:pl-8') : (app()->getLocale() == 'ar' ? 'md:mr-auto md:pl-8' : 'md:ml-auto md:pr-8') }}">
                             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 p-6 card-hover">
                                 <!-- Company Info -->
                                 <div class="flex items-center mb-4">
                                     @if($experience->company_logo)
                                         <img src="{{ asset('storage/' . $experience->company_logo) }}" 
                                              alt="{{ app()->getLocale() == 'ar' ? $experience->company_name_ar : $experience->company_name_en }}" 
-                                             class="w-12 h-12 rounded-lg object-cover mr-4">
+                                             class="w-12 h-12 rounded-lg object-cover {{ app()->getLocale() == 'ar' ? 'ml-4' : 'mr-4' }}">
                                     @else
-                                        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center mr-4">
+                                        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center {{ app()->getLocale() == 'ar' ? 'ml-4' : 'mr-4' }}">
                                             <i class="fas fa-building text-purple-600 dark:text-purple-400"></i>
                                         </div>
                                     @endif
@@ -58,12 +58,12 @@
                                 <!-- Date and Location -->
                                 <div class="flex flex-wrap items-center gap-4 mb-4 text-sm text-gray-600 dark:text-gray-400">
                                     <div class="flex items-center">
-                                        <i class="fas fa-calendar mr-2"></i>
+                                        <i class="fas fa-calendar {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
                                         {{ $experience->start_date }} - {{ $experience->end_date ?? __('message.present') }}
                                     </div>
                                     @if($experience->location)
                                         <div class="flex items-center">
-                                            <i class="fas fa-map-marker-alt mr-2"></i>
+                                            <i class="fas fa-map-marker-alt {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
                                             {{ $experience->location }}
                                         </div>
                                     @endif
