@@ -10,32 +10,6 @@ use Illuminate\Http\Request;
 
 class PortfolioController extends Controller
 {
-    private function getConfig()
-    {
-        $config = Config::first();
-
-        // إذا لم توجد بيانات في configs، ننشئ default config
-        if (!$config) {
-            $config = new Config([
-                'name_ar' => 'أحمد محمد',
-                'name_en' => 'Ahmed Mohamed',
-                'job_title_ar' => 'مطور ويب',
-                'job_title_en' => 'Web Developer',
-                'summary_ar' => 'مطور ويب محترف مع خبرة في تطوير التطبيقات الحديثة',
-                'summary_en' => 'Professional web developer with experience in modern application development',
-                'about_me_ar' => 'مرحباً، أنا مطور ويب محترف أحب إنشاء تطبيقات ويب مبتكرة وحلول تقنية متقدمة.',
-                'about_me_en' => 'Hello, I am a professional web developer who loves creating innovative web applications and advanced technical solutions.',
-                'email' => 'developer@example.com',
-                'phone' => '+1234567890',
-                'address' => 'مدينة، دولة',
-                'site_name' => 'Portfolio',
-                'site_description' => 'My Professional Portfolio',
-                'copyright' => '© ' . date('Y') . ' All rights reserved.',
-            ]);
-        }
-
-        return $config;
-    }
 
     public function changeLanguage($locale)
     {
@@ -49,7 +23,7 @@ class PortfolioController extends Controller
 
     public function index()
     {
-        $config = $this->getConfig();
+        $config = Config::first();
         $experiences = Experience::orderBy('start_date', 'desc')->get();
         $projects = Project::with(['skills', 'images', 'experience'])->get();
         $skills = Skill::with('projects')->get();
@@ -59,7 +33,7 @@ class PortfolioController extends Controller
 
     public function projects()
     {
-        $config = $this->getConfig();
+        $config = Config::first();
         $projects = Project::with(['skills', 'images', 'experience'])->get();
 
         return view('portfolio.projects', compact('config', 'projects'));
@@ -67,7 +41,7 @@ class PortfolioController extends Controller
 
     public function project($id)
     {
-        $config = $this->getConfig();
+        $config = Config::first();
         $project = Project::with(['skills', 'images', 'experience'])->findOrFail($id);
 
         return view('portfolio.project-detail', compact('config', 'project'));
@@ -75,7 +49,7 @@ class PortfolioController extends Controller
 
     public function experiences()
     {
-        $config = $this->getConfig();
+        $config = Config::first();
         $experiences = Experience::orderBy('start_date', 'desc')->get();
 
         return view('portfolio.experiences', compact('config', 'experiences'));
@@ -83,7 +57,7 @@ class PortfolioController extends Controller
 
     public function skills()
     {
-        $config = $this->getConfig();
+        $config = Config::first();
         $skills = Skill::with('projects')->get();
 
         return view('portfolio.skills', compact('config', 'skills'));
@@ -91,14 +65,14 @@ class PortfolioController extends Controller
 
     public function about()
     {
-        $config = $this->getConfig();
+        $config = Config::first();
 
         return view('portfolio.about', compact('config'));
     }
 
     public function contact()
     {
-        $config = $this->getConfig();
+        $config = Config::first();
 
         return view('portfolio.contact', compact('config'));
     }
