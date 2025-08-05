@@ -1,6 +1,6 @@
 @extends('portfolio.layout')
 
-@section('title', (app()->getLocale() == 'ar' ? 'المشاريع' : 'Projects') . ' - ' . ($config->site_name ?? 'Portfolio'))
+@section('title', __('message.projects') . ' - ' . ($config->site_name ?? 'Portfolio'))
 
 @section('content')
 <!-- Page Header -->
@@ -8,22 +8,22 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center text-white" data-aos="fade-up">
             <h1 class="text-5xl font-bold mb-6">
-                {{ app()->getLocale() == 'ar' ? 'مشاريعي' : 'My Projects' }}
+                {{ __('message.projects') }}
             </h1>
             <p class="text-xl text-purple-100 max-w-2xl mx-auto">
-                {{ app()->getLocale() == 'ar' ? 'مجموعة شاملة من المشاريع التي طورتها باستخدام أحدث التقنيات' : 'A comprehensive collection of projects I\'ve developed using the latest technologies' }}
+                {{ __('message.projects_page_desc') }}
             </p>
         </div>
     </div>
 </section>
 
 <!-- Projects Grid -->
-<section class="py-20 bg-gray-50">
+<section class="py-20 bg-gray-50 dark:bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         @if($projects->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($projects as $project)
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         @if($project->images->first())
                             <img src="{{ asset('storage/' . $project->images->first()->image_path) }}" 
                                  alt="{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}" 
@@ -36,17 +36,17 @@
                         
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-3">
-                                <h3 class="text-xl font-bold text-gray-800">
+                                <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200">
                                     {{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}
                                 </h3>
                                 @if($project->experience)
-                                    <span class="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">
+                                    <span class="text-xs bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-400 px-2 py-1 rounded-full">
                                         {{ app()->getLocale() == 'ar' ? $project->experience->company_name_ar : $project->experience->company_name_en }}
                                     </span>
                                 @endif
                             </div>
                             
-                            <p class="text-gray-600 mb-4">
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">
                                 {{ Str::limit(app()->getLocale() == 'ar' ? $project->description_ar : $project->description_en, 120) }}
                             </p>
                             
@@ -58,7 +58,7 @@
                                     </span>
                                 @endforeach
                                 @if($project->skills->count() > 4)
-                                    <span class="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-full">
+                                    <span class="text-xs bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-full">
                                         +{{ $project->skills->count() - 4 }} {{ app()->getLocale() == 'ar' ? 'أخرى' : 'more' }}
                                     </span>
                                 @endif
@@ -67,15 +67,15 @@
                             <!-- Action Buttons -->
                             <div class="flex justify-between items-center">
                                 <a href="{{ route('portfolio.project', $project->id) }}" 
-                                   class="text-purple-600 hover:text-purple-800 font-semibold transition-colors">
-                                    {{ app()->getLocale() == 'ar' ? 'مشاهدة التفاصيل' : 'View Details' }}
+                                   class="text-purple-600 dark:text-purple-300 hover:text-purple-800 dark:hover:text-purple-100 font-semibold transition-colors">
+                                    {{ __('message.view_details') }}
                                     <i class="fas fa-arrow-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }} ml-1"></i>
                                 </a>
                                 
                                 <div class="flex space-x-3">
                                     @if($project->github_link)
                                         <a href="{{ $project->github_link }}" target="_blank" 
-                                           class="text-gray-600 hover:text-gray-800 transition-colors" 
+                                           class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white transition-colors" 
                                            title="GitHub">
                                             <i class="fab fa-github text-xl"></i>
                                         </a>
@@ -125,14 +125,14 @@
 
 <!-- Projects by Experience -->
 @if($projects->whereNotNull('experience_id')->count() > 0)
-<section class="py-20 bg-white">
+<section class="py-20 bg-white dark:bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16" data-aos="fade-up">
-            <h2 class="text-4xl font-bold text-gray-800 mb-4">
-                {{ app()->getLocale() == 'ar' ? 'المشاريع حسب الخبرة المهنية' : 'Projects by Experience' }}
+            <h2 class="text-4xl font-bold text-gray-800 dark:text-white mb-4">
+                {{ __('message.projects_by_experience') }}
             </h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                {{ app()->getLocale() == 'ar' ? 'المشاريع التي طورتها خلال رحلتي المهنية' : 'Projects I developed during my professional journey' }}
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                {{ __('message.projects_experience_desc') }}
             </p>
         </div>
         
@@ -152,10 +152,10 @@
                              class="w-12 h-12 rounded-lg object-cover mr-4">
                     @endif
                     <div>
-                        <h3 class="text-2xl font-bold text-gray-800">
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white">
                             {{ app()->getLocale() == 'ar' ? $experience->company_name_ar : $experience->company_name_en }}
                         </h3>
-                        <p class="text-gray-600">
+                        <p class="text-gray-600 dark:text-gray-300">
                             {{ app()->getLocale() == 'ar' ? $experience->title_ar : $experience->title_en }}
                         </p>
                     </div>
@@ -163,23 +163,23 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach($projectGroup as $project)
-                        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 hover:border-purple-300 transition-colors">
-                            <h4 class="font-semibold text-gray-800 mb-2">
+                        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-500 transition-colors">
+                            <h4 class="font-semibold text-gray-800 dark:text-white mb-2">
                                 {{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}
                             </h4>
-                            <p class="text-gray-600 text-sm mb-3">
+                            <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
                                 {{ Str::limit(app()->getLocale() == 'ar' ? $project->description_ar : $project->description_en, 80) }}
                             </p>
                             <div class="flex flex-wrap gap-1 mb-3">
                                 @foreach($project->skills->take(3) as $skill)
-                                    <span class="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded">
+                                    <span class="text-xs bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-400 px-2 py-1 rounded">
                                         {{ app()->getLocale() == 'ar' ? $skill->name_ar : $skill->name_en }}
                                     </span>
                                 @endforeach
                             </div>
                             <a href="{{ route('portfolio.project', $project->id) }}" 
-                               class="text-purple-600 hover:text-purple-800 text-sm font-medium transition-colors">
-                                {{ app()->getLocale() == 'ar' ? 'مشاهدة التفاصيل' : 'View Details' }}
+                               class="text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 text-sm font-medium transition-colors">
+                                {{ __('message.view_details') }}
                                 <i class="fas fa-arrow-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }} ml-1"></i>
                             </a>
                         </div>
@@ -195,14 +195,14 @@
 <section class="py-20 gradient-bg">
     <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8" data-aos="fade-up">
         <h2 class="text-4xl font-bold text-white mb-6">
-            {{ app()->getLocale() == 'ar' ? 'أعجبك ما رأيت؟' : 'Like What You See?' }}
+            {{ __('message.like_what_you_see') }}
         </h2>
         <p class="text-xl text-purple-100 mb-8">
-            {{ app()->getLocale() == 'ar' ? 'دعنا نتحدث عن مشروعك القادم' : 'Let\'s talk about your next project' }}
+            {{ __('message.talk_next_project') }}
         </p>
         <a href="{{ route('portfolio.contact') }}" 
-           class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-all inline-block">
-            {{ app()->getLocale() == 'ar' ? 'تواصل معي' : 'Get In Touch' }}
+           class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-all inline-block transform hover:scale-105 shadow-lg">
+            {{ __('message.get_in_touch') }}
         </a>
     </div>
 </section>
