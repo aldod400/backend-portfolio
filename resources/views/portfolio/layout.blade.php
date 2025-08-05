@@ -40,7 +40,7 @@
         }
         
         .dark .gradient-bg {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
         }
         
         .card-hover {
@@ -87,7 +87,8 @@
         }
         
         .dark .skill-badge {
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
         }
         
         /* Dark mode transitions */
@@ -114,34 +115,34 @@
                 
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="{{ route('portfolio.index') }}" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
-                        {{ app()->getLocale() == 'ar' ? 'الرئيسية' : 'Home' }}
+                        {{ __('message.home') }}
                     </a>
                     <a href="{{ route('portfolio.about') }}" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
-                        {{ app()->getLocale() == 'ar' ? 'نبذة عني' : 'About' }}
+                        {{ __('message.about') }}
                     </a>
                     <a href="{{ route('portfolio.experiences') }}" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
-                        {{ app()->getLocale() == 'ar' ? 'الخبرات' : 'Experience' }}
+                        {{ __('message.experiences') }}
                     </a>
                     <a href="{{ route('portfolio.projects') }}" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
-                        {{ app()->getLocale() == 'ar' ? 'المشاريع' : 'Projects' }}
+                        {{ __('message.projects') }}
                     </a>
                     <a href="{{ route('portfolio.skills') }}" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
-                        {{ app()->getLocale() == 'ar' ? 'المهارات' : 'Skills' }}
+                        {{ __('message.skills') }}
                     </a>
                     <a href="{{ route('portfolio.contact') }}" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
-                        {{ app()->getLocale() == 'ar' ? 'تواصل معي' : 'Contact' }}
+                        {{ __('message.contact') }}
                     </a>
                     
                     <!-- Language Switch -->
                     <div class="flex items-center space-x-2">
                         <a href="{{ route('lang.switch', 'ar') }}" 
                            class="px-2 py-1 rounded {{ app()->getLocale() == 'ar' ? 'bg-purple-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400' }} transition-colors text-sm font-medium">
-                            العربية
+                            {{ __('message.arabic') }}
                         </a>
                         <span class="text-gray-400">|</span>
                         <a href="{{ route('lang.switch', 'en') }}" 
                            class="px-2 py-1 rounded {{ app()->getLocale() == 'en' ? 'bg-purple-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400' }} transition-colors text-sm font-medium">
-                            English
+                            {{ __('message.english') }}
                         </a>
                     </div>
                     
@@ -171,22 +172,22 @@
         <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
             <div class="px-2 pt-2 pb-3 space-y-1">
                 <a href="{{ route('portfolio.index') }}" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
-                    {{ app()->getLocale() == 'ar' ? 'الرئيسية' : 'Home' }}
+                    {{ __('message.home') }}
                 </a>
                 <a href="{{ route('portfolio.about') }}" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
-                    {{ app()->getLocale() == 'ar' ? 'نبذة عني' : 'About' }}
+                    {{ __('message.about') }}
                 </a>
                 <a href="{{ route('portfolio.experiences') }}" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
-                    {{ app()->getLocale() == 'ar' ? 'الخبرات' : 'Experience' }}
+                    {{ __('message.experiences') }}
                 </a>
                 <a href="{{ route('portfolio.projects') }}" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
-                    {{ app()->getLocale() == 'ar' ? 'المشاريع' : 'Projects' }}
+                    {{ __('message.projects') }}
                 </a>
                 <a href="{{ route('portfolio.skills') }}" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
-                    {{ app()->getLocale() == 'ar' ? 'المهارات' : 'Skills' }}
+                    {{ __('message.skills') }}
                 </a>
                 <a href="{{ route('portfolio.contact') }}" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
-                    {{ app()->getLocale() == 'ar' ? 'تواصل معي' : 'Contact' }}
+                    {{ __('message.contact') }}
                 </a>
                 
                 <!-- Language Switch Mobile -->
@@ -194,11 +195,11 @@
                     <div class="flex space-x-4">
                         <a href="{{ route('lang.switch', 'ar') }}" 
                            class="px-3 py-1 rounded {{ app()->getLocale() == 'ar' ? 'bg-purple-600 text-white' : 'text-gray-600 dark:text-gray-400' }} transition-colors text-sm">
-                            العربية
+                            {{ __('message.arabic') }}
                         </a>
                         <a href="{{ route('lang.switch', 'en') }}" 
                            class="px-3 py-1 rounded {{ app()->getLocale() == 'en' ? 'bg-purple-600 text-white' : 'text-gray-600 dark:text-gray-400' }} transition-colors text-sm">
-                            English
+                            {{ __('message.english') }}
                         </a>
                     </div>
                 </div>
@@ -212,35 +213,35 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 dark:bg-gray-950 text-white py-12">
+    <footer class="bg-gray-900 dark:bg-black text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                    <h3 class="text-xl font-bold mb-4">{{ ($config && ($config->name_ar ?? $config->name_en)) ? (app()->getLocale() == 'ar' ? $config->name_ar : $config->name_en) : 'Portfolio' }}</h3>
-                    <p class="text-gray-400 mb-4">{{ ($config && ($config->summary_ar ?? $config->summary_en)) ? (app()->getLocale() == 'ar' ? $config->summary_ar : $config->summary_en) : '' }}</p>
+                    <h3 class="text-xl font-bold mb-4 text-white">{{ ($config && ($config->name_ar ?? $config->name_en)) ? (app()->getLocale() == 'ar' ? $config->name_ar : $config->name_en) : 'Portfolio' }}</h3>
+                    <p class="text-gray-300 dark:text-gray-400 mb-4">{{ ($config && ($config->summary_ar ?? $config->summary_en)) ? (app()->getLocale() == 'ar' ? $config->summary_ar : $config->summary_en) : '' }}</p>
                     <div class="flex space-x-4">
                         @if($config && $config->facebook)
-                            <a href="{{ $config->facebook }}" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <a href="{{ $config->facebook }}" target="_blank" class="text-gray-300 dark:text-gray-400 hover:text-white transition-colors">
                                 <i class="fab fa-facebook text-xl"></i>
                             </a>
                         @endif
                         @if($config && $config->twitter)
-                            <a href="{{ $config->twitter }}" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <a href="{{ $config->twitter }}" target="_blank" class="text-gray-300 dark:text-gray-400 hover:text-white transition-colors">
                                 <i class="fab fa-twitter text-xl"></i>
                             </a>
                         @endif
                         @if($config && $config->linkedin)
-                            <a href="{{ $config->linkedin }}" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <a href="{{ $config->linkedin }}" target="_blank" class="text-gray-300 dark:text-gray-400 hover:text-white transition-colors">
                                 <i class="fab fa-linkedin text-xl"></i>
                             </a>
                         @endif
                         @if($config && $config->github)
-                            <a href="{{ $config->github }}" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <a href="{{ $config->github }}" target="_blank" class="text-gray-300 dark:text-gray-400 hover:text-white transition-colors">
                                 <i class="fab fa-github text-xl"></i>
                             </a>
                         @endif
                         @if($config && $config->instagram)
-                            <a href="{{ $config->instagram }}" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <a href="{{ $config->instagram }}" target="_blank" class="text-gray-300 dark:text-gray-400 hover:text-white transition-colors">
                                 <i class="fab fa-instagram text-xl"></i>
                             </a>
                         @endif
@@ -248,32 +249,32 @@
                 </div>
                 
                 <div>
-                    <h3 class="text-xl font-bold mb-4">{{ app()->getLocale() == 'ar' ? 'روابط سريعة' : 'Quick Links' }}</h3>
+                    <h3 class="text-xl font-bold mb-4 text-white">{{ __('message.nav_quick_links') }}</h3>
                     <ul class="space-y-2">
-                        <li><a href="{{ route('portfolio.about') }}" class="text-gray-400 hover:text-white transition-colors">{{ app()->getLocale() == 'ar' ? 'نبذة عني' : 'About' }}</a></li>
-                        <li><a href="{{ route('portfolio.projects') }}" class="text-gray-400 hover:text-white transition-colors">{{ app()->getLocale() == 'ar' ? 'المشاريع' : 'Projects' }}</a></li>
-                        <li><a href="{{ route('portfolio.experiences') }}" class="text-gray-400 hover:text-white transition-colors">{{ app()->getLocale() == 'ar' ? 'الخبرات' : 'Experience' }}</a></li>
-                        <li><a href="{{ route('portfolio.contact') }}" class="text-gray-400 hover:text-white transition-colors">{{ app()->getLocale() == 'ar' ? 'تواصل معي' : 'Contact' }}</a></li>
+                        <li><a href="{{ route('portfolio.about') }}" class="text-gray-300 dark:text-gray-400 hover:text-white transition-colors">{{ __('message.about') }}</a></li>
+                        <li><a href="{{ route('portfolio.projects') }}" class="text-gray-300 dark:text-gray-400 hover:text-white transition-colors">{{ __('message.projects') }}</a></li>
+                        <li><a href="{{ route('portfolio.experiences') }}" class="text-gray-300 dark:text-gray-400 hover:text-white transition-colors">{{ __('message.experiences') }}</a></li>
+                        <li><a href="{{ route('portfolio.contact') }}" class="text-gray-300 dark:text-gray-400 hover:text-white transition-colors">{{ __('message.contact') }}</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h3 class="text-xl font-bold mb-4">{{ app()->getLocale() == 'ar' ? 'معلومات التواصل' : 'Contact Info' }}</h3>
+                    <h3 class="text-xl font-bold mb-4 text-white">{{ __('message.contact_info') }}</h3>
                     <ul class="space-y-2">
                         @if($config && $config->email)
-                            <li class="flex items-center text-gray-400">
+                            <li class="flex items-center text-gray-300 dark:text-gray-400">
                                 <i class="fas fa-envelope mr-2"></i>
                                 {{ $config->email }}
                             </li>
                         @endif
                         @if($config && $config->phone)
-                            <li class="flex items-center text-gray-400">
+                            <li class="flex items-center text-gray-300 dark:text-gray-400">
                                 <i class="fas fa-phone mr-2"></i>
                                 {{ $config->phone }}
                             </li>
                         @endif
                         @if($config && $config->address)
-                            <li class="flex items-center text-gray-400">
+                            <li class="flex items-center text-gray-300 dark:text-gray-400">
                                 <i class="fas fa-map-marker-alt mr-2"></i>
                                 {{ $config->address }}
                             </li>
@@ -282,8 +283,8 @@
                 </div>
             </div>
             
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-                <p class="text-gray-400">{{ ($config && $config->copyright) ? $config->copyright : '© ' . date('Y') . ' All rights reserved.' }}</p>
+            <div class="border-t border-gray-700 dark:border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-300 dark:text-gray-400">{{ ($config && $config->copyright) ? $config->copyright : '© ' . date('Y') . ' All rights reserved.' }}</p>
             </div>
         </div>
     </footer>

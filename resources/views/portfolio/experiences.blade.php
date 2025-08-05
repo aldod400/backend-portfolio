@@ -1,6 +1,6 @@
 @extends('portfolio.layout')
 
-@section('title', (app()->getLocale() == 'ar' ? 'الخبرات' : 'Experience') . ' - ' . ($config->site_name ?? 'Portfolio'))
+@section('title', __('message.experiences') . ' - ' . ($config->site_name ?? 'Portfolio'))
 
 @section('content')
 <!-- Page Header -->
@@ -8,31 +8,31 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center text-white" data-aos="fade-up">
             <h1 class="text-5xl font-bold mb-6">
-                {{ app()->getLocale() == 'ar' ? 'خبراتي المهنية' : 'My Experience' }}
+                {{ __('message.my_experience') }}
             </h1>
             <p class="text-xl text-purple-100 max-w-2xl mx-auto">
-                {{ app()->getLocale() == 'ar' ? 'رحلتي المهنية والخبرات التي اكتسبتها عبر السنين' : 'My professional journey and the experiences I\'ve gained over the years' }}
+                {{ __('message.experience_page_desc') }}
             </p>
         </div>
     </div>
 </section>
 
 <!-- Experience Timeline -->
-<section class="py-20 bg-gray-50">
+<section class="py-20 bg-gray-50 dark:bg-gray-900">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         @if($experiences->count() > 0)
             <div class="relative">
                 <!-- Timeline Line -->
-                <div class="absolute left-8 md:left-1/2 transform md:-translate-x-px h-full w-0.5 bg-purple-200"></div>
+                <div class="absolute left-8 md:left-1/2 transform md:-translate-x-px h-full w-0.5 bg-purple-200 dark:bg-purple-800"></div>
                 
                 @foreach($experiences as $experience)
                     <div class="relative flex items-center mb-12 {{ $loop->index % 2 == 0 ? 'md:flex-row-reverse' : '' }}" data-aos="fade-up" data-aos-delay="{{ $loop->index * 200 }}">
                         <!-- Timeline Dot -->
-                        <div class="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-purple-600 rounded-full border-4 border-white shadow-lg z-10"></div>
+                        <div class="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-purple-600 dark:bg-purple-500 rounded-full border-4 border-white dark:border-gray-900 shadow-lg z-10"></div>
                         
                         <!-- Content Card -->
                         <div class="ml-20 md:ml-0 md:w-5/12 {{ $loop->index % 2 == 0 ? 'md:mr-auto md:pl-8' : 'md:ml-auto md:pr-8' }}">
-                            <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 p-6 card-hover">
                                 <!-- Company Info -->
                                 <div class="flex items-center mb-4">
                                     @if($experience->company_logo)
@@ -40,26 +40,26 @@
                                              alt="{{ app()->getLocale() == 'ar' ? $experience->company_name_ar : $experience->company_name_en }}" 
                                              class="w-12 h-12 rounded-lg object-cover mr-4">
                                     @else
-                                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
-                                            <i class="fas fa-building text-purple-600"></i>
+                                        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center mr-4">
+                                            <i class="fas fa-building text-purple-600 dark:text-purple-400"></i>
                                         </div>
                                     @endif
                                     
                                     <div>
-                                        <h3 class="text-xl font-bold text-gray-800">
+                                        <h3 class="text-xl font-bold text-gray-800 dark:text-white">
                                             {{ app()->getLocale() == 'ar' ? $experience->title_ar : $experience->title_en }}
                                         </h3>
-                                        <p class="text-purple-600 font-semibold">
+                                        <p class="text-purple-600 dark:text-purple-400 font-semibold">
                                             {{ app()->getLocale() == 'ar' ? $experience->company_name_ar : $experience->company_name_en }}
                                         </p>
                                     </div>
                                 </div>
                                 
                                 <!-- Date and Location -->
-                                <div class="flex flex-wrap items-center gap-4 mb-4 text-sm text-gray-600">
+                                <div class="flex flex-wrap items-center gap-4 mb-4 text-sm text-gray-600 dark:text-gray-400">
                                     <div class="flex items-center">
                                         <i class="fas fa-calendar mr-2"></i>
-                                        {{ $experience->start_date }} - {{ $experience->end_date ?? (app()->getLocale() == 'ar' ? 'حتى الآن' : 'Present') }}
+                                        {{ $experience->start_date }} - {{ $experience->end_date ?? __('message.present') }}
                                     </div>
                                     @if($experience->location)
                                         <div class="flex items-center">
@@ -70,7 +70,7 @@
                                 </div>
                                 
                                 <!-- Description -->
-                                <p class="text-gray-700 leading-relaxed mb-4">
+                                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                                     {{ app()->getLocale() == 'ar' ? $experience->description_ar : $experience->description_en }}
                                 </p>
                                 
@@ -79,20 +79,20 @@
                                     $experienceProjects = $experience->projects ?? collect();
                                 @endphp
                                 @if($experienceProjects->count() > 0)
-                                    <div class="border-t pt-4">
-                                        <h4 class="font-semibold text-gray-800 mb-2">
-                                            {{ app()->getLocale() == 'ar' ? 'المشاريع ذات الصلة:' : 'Related Projects:' }}
+                                    <div class="border-t dark:border-gray-600 pt-4">
+                                        <h4 class="font-semibold text-gray-800 dark:text-white mb-2">
+                                            {{ __('message.related_projects') }}
                                         </h4>
                                         <div class="flex flex-wrap gap-2">
                                             @foreach($experienceProjects->take(3) as $project)
                                                 <a href="{{ route('portfolio.project', $project->id) }}" 
-                                                   class="text-sm bg-purple-100 text-purple-600 px-3 py-1 rounded-full hover:bg-purple-200 transition-colors">
+                                                   class="text-sm bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-400 px-3 py-1 rounded-full hover:bg-purple-200 dark:hover:bg-purple-900/70 transition-colors">
                                                     {{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}
                                                 </a>
                                             @endforeach
                                             @if($experienceProjects->count() > 3)
-                                                <span class="text-sm text-gray-500">
-                                                    +{{ $experienceProjects->count() - 3 }} {{ app()->getLocale() == 'ar' ? 'أخرى' : 'more' }}
+                                                <span class="text-sm text-gray-500 dark:text-gray-400">
+                                                    +{{ $experienceProjects->count() - 3 }} {{ __('message.more') }}
                                                 </span>
                                             @endif
                                         </div>
@@ -128,19 +128,19 @@
 
 <!-- Skills Overview -->
 @if($config->about_me_ar || $config->about_me_en)
-<section class="py-20 bg-white">
+<section class="py-20 bg-white dark:bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div data-aos="fade-right">
-                <h2 class="text-4xl font-bold text-gray-800 mb-6">
-                    {{ app()->getLocale() == 'ar' ? 'نبذة عن مسيرتي المهنية' : 'About My Professional Journey' }}
+                <h2 class="text-4xl font-bold text-gray-800 dark:text-white mb-6">
+                    {{ __('message.about_professional_journey') }}
                 </h2>
-                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
                     {{ app()->getLocale() == 'ar' ? $config->about_me_ar : $config->about_me_en }}
                 </p>
                 <a href="{{ route('portfolio.about') }}" 
-                   class="btn-primary px-6 py-3 rounded-full font-semibold text-white hover:text-white transition-all inline-block">
-                    {{ app()->getLocale() == 'ar' ? 'اقرأ المزيد عني' : 'Learn More About Me' }}
+                   class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-full font-semibold transition-all inline-block transform hover:scale-105 shadow-lg">
+                    {{ __('message.learn_more_about_me') }}
                 </a>
             </div>
             
@@ -150,8 +150,8 @@
                          alt="{{ $config->name_ar ?? $config->name_en }}" 
                          class="w-full max-w-md mx-auto rounded-2xl shadow-2xl">
                 @else
-                    <div class="w-full max-w-md mx-auto h-96 bg-gray-200 rounded-2xl flex items-center justify-center">
-                        <i class="fas fa-user text-6xl text-gray-400"></i>
+                    <div class="w-full max-w-md mx-auto h-96 bg-gray-200 dark:bg-gray-600 rounded-2xl flex items-center justify-center">
+                        <i class="fas fa-user text-6xl text-gray-400 dark:text-gray-500"></i>
                     </div>
                 @endif
             </div>
@@ -161,54 +161,54 @@
 @endif
 
 <!-- Experience Summary -->
-<section class="py-20 bg-gray-50">
+<section class="py-20 bg-gray-50 dark:bg-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16" data-aos="fade-up">
-            <h2 class="text-4xl font-bold text-gray-800 mb-4">
-                {{ app()->getLocale() == 'ar' ? 'ملخص الخبرات' : 'Experience Summary' }}
+            <h2 class="text-4xl font-bold text-gray-800 dark:text-white mb-4">
+                {{ __('message.experience_summary') }}
             </h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                {{ app()->getLocale() == 'ar' ? 'إحصائيات سريعة عن مسيرتي المهنية' : 'Quick stats about my professional career' }}
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                {{ __('message.experience_summary_desc') }}
             </p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div class="text-center" data-aos="fade-up" data-aos-delay="100">
-                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-calendar-alt text-2xl text-blue-600"></i>
+                <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-calendar-alt text-2xl text-blue-600 dark:text-blue-400"></i>
                 </div>
-                <h3 class="text-3xl font-bold text-gray-800 mb-2">{{ $experiences->count() }}+</h3>
-                <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'سنوات خبرة' : 'Years Experience' }}</p>
+                <h3 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">{{ $experiences->count() }}+</h3>
+                <p class="text-gray-600 dark:text-gray-300">{{ __('message.years_experience') }}</p>
             </div>
             
             <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-building text-2xl text-green-600"></i>
+                <div class="w-16 h-16 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-building text-2xl text-green-600 dark:text-green-400"></i>
                 </div>
-                <h3 class="text-3xl font-bold text-gray-800 mb-2">{{ $experiences->count() }}</h3>
-                <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'شركة' : 'Companies' }}</p>
+                <h3 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">{{ $experiences->count() }}</h3>
+                <p class="text-gray-600 dark:text-gray-300">{{ __('message.companies') }}</p>
             </div>
             
             <div class="text-center" data-aos="fade-up" data-aos-delay="300">
-                <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-project-diagram text-2xl text-purple-600"></i>
+                <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-project-diagram text-2xl text-purple-600 dark:text-purple-400"></i>
                 </div>
                 @php
                     $totalProjects = \App\Models\Project::whereNotNull('experience_id')->count();
                 @endphp
-                <h3 class="text-3xl font-bold text-gray-800 mb-2">{{ $totalProjects }}+</h3>
-                <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'مشروع أثناء العمل' : 'Work Projects' }}</p>
+                <h3 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">{{ $totalProjects }}+</h3>
+                <p class="text-gray-600 dark:text-gray-300">{{ __('message.work_projects') }}</p>
             </div>
             
             <div class="text-center" data-aos="fade-up" data-aos-delay="400">
-                <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-code text-2xl text-orange-600"></i>
+                <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-code text-2xl text-orange-600 dark:text-orange-400"></i>
                 </div>
                 @php
                     $totalSkills = \App\Models\Skill::count();
                 @endphp
-                <h3 class="text-3xl font-bold text-gray-800 mb-2">{{ $totalSkills }}+</h3>
-                <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'مهارة تقنية' : 'Technical Skills' }}</p>
+                <h3 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">{{ $totalSkills }}+</h3>
+                <p class="text-gray-600 dark:text-gray-300">{{ __('message.technical_skills') }}</p>
             </div>
         </div>
     </div>
@@ -218,19 +218,19 @@
 <section class="py-20 gradient-bg">
     <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8" data-aos="fade-up">
         <h2 class="text-4xl font-bold text-white mb-6">
-            {{ app()->getLocale() == 'ar' ? 'مهتم بالعمل معي؟' : 'Interested in Working Together?' }}
+            {{ __('message.interested_working_together') }}
         </h2>
         <p class="text-xl text-purple-100 mb-8">
-            {{ app()->getLocale() == 'ar' ? 'دعنا نناقش كيف يمكن لخبرتي أن تساعد في نجاح مشروعك' : 'Let\'s discuss how my experience can help make your project a success' }}
+            {{ __('message.discuss_experience_help') }}
         </p>
         <div class="flex flex-wrap justify-center gap-4">
             <a href="{{ route('portfolio.contact') }}" 
                class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-all">
-                {{ app()->getLocale() == 'ar' ? 'تواصل معي' : 'Contact Me' }}
+                {{ __('message.contact_me') }}
             </a>
             <a href="{{ route('portfolio.projects') }}" 
                class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-purple-600 transition-all">
-                {{ app()->getLocale() == 'ar' ? 'مشاهدة أعمالي' : 'View My Work' }}
+                {{ __('message.view_my_work') }}
             </a>
         </div>
     </div>
