@@ -17,33 +17,128 @@ class SkillResource extends Resource
 {
     protected static ?string $model = Skill::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-cpu-chip';
+
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
-            ]);
+                Forms\Components\Section::make('Skill Information')
+                    ->description('Programming languages, frameworks, and technical skills')
+                    ->icon('heroicon-o-cpu-chip')
+                    ->collapsible()
+                    ->schema([
+                        Forms\Components\Grid::make(2)
+                            ->schema([
+                                Forms\Components\TextInput::make('name_ar')
+                                    ->label('Skill Name (Arabic)')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->prefixIcon('heroicon-o-code-bracket'),
+                                Forms\Components\TextInput::make('name_en')
+                                    ->label('Skill Name (English)')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->prefixIcon('heroicon-o-code-bracket'),
+                            ]),
+                    ]),
+            ])
+            ->columns(1);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name_en')
+                    ->label('Skill Name (English)')
+                    ->searchable()
+                    ->sortable()
+                    ->weight('bold'),
+                Tables\Columns\TextColumn::make('name_ar')
+                    ->label('Skill Name (Arabic)')
+                    ->searchable()
+                    ->sortable()
+                    ->color('gray'),
+                Tables\Columns\TextColumn::make('projects_count')
+                    ->label('Projects Using This Skill')
+                    ->counts('projects')
+                    ->badge()
+                    ->color(fn($state) => match (true) {
+                        $state >= 5 => 'success',
+                        $state >= 3 => 'warning',
+                        $state >= 1 => 'info',
+                        default => 'gray',
+                    }),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Created')
+                    ->dateTime('d/m/Y H:i')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Updated')
+                    ->dateTime('d/m/Y H:i')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make('popular_skills')
+                    ->label('Popular Skills')
+                    ->query(
+                        fn(Builder $query): Builder =>
+                        $query->has('projects', '>=', 3)
+                    ),
+                Tables\Filters\Filter::make('unused_skills')
+                    ->label('Unused Skills')
+                    ->query(
+                        fn(Builder $query): Builder =>
+                        $query->doesntHave('projects')
+                    ),
+                Tables\Filters\Filter::make('recently_added')
+                    ->label('Recently Added')
+                    ->query(
+                        fn(Builder $query): Builder =>
+                        $query->where('created_at', '>=', now()->subDays(30))
+                    ),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()
+                        ->color('info'),
+                    Tables\Actions\EditAction::make()
+                        ->color('warning'),
+                    Tables\Actions\DeleteAction::make()
+                        ->color('danger'),
+                ])
+                    ->label('Actions')
+                    ->icon('heroicon-m-ellipsis-vertical')
+                    ->size('sm')
+                    ->color('gray')
+                    ->button(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\BulkAction::make('mark_as_featured')
+                        ->label('Mark as Featured')
+                        ->icon('heroicon-o-star')
+                        ->color('warning')
+                        ->action(function ($records) {
+                            // You can add a 'featured' field to the skills table if needed
+                            // $records->each(function ($record) {
+                            //     $record->update(['featured' => true]);
+                            // });
+                        })
+                        ->requiresConfirmation()
+                        ->disabled(true)
+                        ->tooltip('Feature coming soon'),
                 ]),
-            ]);
+            ])
+            ->defaultSort('name_en', 'asc')
+            ->striped()
+            ->paginated([10, 25, 50, 100]);
     }
 
     public static function getRelations(): array
