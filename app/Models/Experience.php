@@ -18,4 +18,9 @@ class Experience extends Model
         'company_name_en',
         'company_logo'
     ];
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }
