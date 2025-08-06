@@ -41,11 +41,11 @@
         }
 
         .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
         }
 
         .dark .gradient-bg {
-            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
         }
 
         .card-hover {
@@ -62,13 +62,13 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
             transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
         }
 
         .navbar-glass {
@@ -81,7 +81,7 @@
         }
 
         .skill-badge {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
             color: white;
             padding: 0.25rem 0.75rem;
             border-radius: 9999px;
@@ -92,7 +92,7 @@
         }
 
         .dark .skill-badge {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
             color: white;
         }
 
@@ -129,27 +129,27 @@
                 <div
                     class="hidden md:flex items-center {{ app()->getLocale() == 'ar' ? 'space-x-reverse space-x-8' : 'space-x-8' }}">
                     <a href="{{ route('portfolio.index') }}"
-                        class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                         {{ __('message.home') }}
                     </a>
                     <a href="{{ route('portfolio.about') }}"
-                        class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                         {{ __('message.about') }}
                     </a>
                     <a href="{{ route('portfolio.experiences') }}"
-                        class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                         {{ __('message.experiences') }}
                     </a>
                     <a href="{{ route('portfolio.projects') }}"
-                        class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                         {{ __('message.projects') }}
                     </a>
                     <a href="{{ route('portfolio.skills') }}"
-                        class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                         {{ __('message.skills') }}
                     </a>
                     <a href="{{ route('portfolio.contact') }}"
-                        class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                         {{ __('message.contact') }}
                     </a>
 
@@ -157,19 +157,19 @@
                     <div
                         class="flex items-center {{ app()->getLocale() == 'ar' ? 'space-x-reverse space-x-2' : 'space-x-2' }}">
                         <a href="{{ route('lang.switch', 'ar') }}"
-                            class="px-2 py-1 rounded {{ app()->getLocale() == 'ar' ? 'bg-purple-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400' }} transition-colors text-sm font-medium">
+                            class="px-2 py-1 rounded {{ app()->getLocale() == 'ar' ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400' }} transition-colors text-sm font-medium">
                             {{ __('message.arabic') }}
                         </a>
                         <span class="text-gray-400">|</span>
                         <a href="{{ route('lang.switch', 'en') }}"
-                            class="px-2 py-1 rounded {{ app()->getLocale() == 'en' ? 'bg-purple-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400' }} transition-colors text-sm font-medium">
+                            class="px-2 py-1 rounded {{ app()->getLocale() == 'en' ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400' }} transition-colors text-sm font-medium">
                             {{ __('message.english') }}
                         </a>
                     </div>
 
                     <!-- Dark Mode Toggle -->
                     <button onclick="toggleDarkMode()"
-                        class="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                        class="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                         <i class="fas fa-moon dark:hidden text-lg"></i>
                         <i class="fas fa-sun hidden dark:block text-lg"></i>
                     </button>
@@ -180,13 +180,13 @@
                     class="md:hidden flex items-center {{ app()->getLocale() == 'ar' ? 'space-x-reverse space-x-3' : 'space-x-3' }}">
                     <!-- Dark Mode Toggle Mobile -->
                     <button onclick="toggleDarkMode()"
-                        class="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                        class="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                         <i class="fas fa-moon dark:hidden"></i>
                         <i class="fas fa-sun hidden dark:block"></i>
                     </button>
 
                     <button id="mobile-menu-button"
-                        class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 focus:outline-none">
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -198,27 +198,27 @@
             class="md:hidden hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
             <div class="px-2 pt-2 pb-3 space-y-1">
                 <a href="{{ route('portfolio.index') }}"
-                    class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
+                    class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                     {{ __('message.home') }}
                 </a>
                 <a href="{{ route('portfolio.about') }}"
-                    class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
+                    class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                     {{ __('message.about') }}
                 </a>
                 <a href="{{ route('portfolio.experiences') }}"
-                    class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
+                    class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                     {{ __('message.experiences') }}
                 </a>
                 <a href="{{ route('portfolio.projects') }}"
-                    class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
+                    class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                     {{ __('message.projects') }}
                 </a>
                 <a href="{{ route('portfolio.skills') }}"
-                    class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
+                    class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                     {{ __('message.skills') }}
                 </a>
                 <a href="{{ route('portfolio.contact') }}"
-                    class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
+                    class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                     {{ __('message.contact') }}
                 </a>
 
@@ -226,11 +226,11 @@
                 <div class="px-3 py-2 border-t border-gray-200 dark:border-gray-600 mt-2">
                     <div class="flex {{ app()->getLocale() == 'ar' ? 'space-x-reverse space-x-4' : 'space-x-4' }}">
                         <a href="{{ route('lang.switch', 'ar') }}"
-                            class="px-3 py-1 rounded {{ app()->getLocale() == 'ar' ? 'bg-purple-600 text-white' : 'text-gray-600 dark:text-gray-400' }} transition-colors text-sm">
+                            class="px-3 py-1 rounded {{ app()->getLocale() == 'ar' ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400' }} transition-colors text-sm">
                             {{ __('message.arabic') }}
                         </a>
                         <a href="{{ route('lang.switch', 'en') }}"
-                            class="px-3 py-1 rounded {{ app()->getLocale() == 'en' ? 'bg-purple-600 text-white' : 'text-gray-600 dark:text-gray-400' }} transition-colors text-sm">
+                            class="px-3 py-1 rounded {{ app()->getLocale() == 'en' ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400' }} transition-colors text-sm">
                             {{ __('message.english') }}
                         </a>
                     </div>
@@ -246,7 +246,7 @@
 
     <!-- Footer -->
     <footer
-        class="relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 dark:from-gray-900 dark:via-purple-950 dark:to-gray-900">
+        class="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 dark:from-gray-900 dark:via-blue-950 dark:to-gray-900">
         <!-- Background Pattern -->
         <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=" 60" height="60" viewBox="0 0 60 60"
             xmlns="http://www.w3.org/2000/svg" %3E%3Cg fill="none" fill-rule="evenodd" %3E%3Cg fill="%239C92AC"
@@ -262,7 +262,7 @@
                                 class="h-10 w-10 rounded-full {{ app()->getLocale() == 'ar' ? 'ml-3' : 'mr-3' }}">
                         @endif
                         <h3
-                            class="text-2xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+                            class="text-2xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
                             {{ ($config && ($config->name_ar ?? $config->name_en)) ? (app()->getLocale() == 'ar' ? $config->name_ar : $config->name_en) : 'Portfolio' }}
                         </h3>
                     </div>
@@ -298,7 +298,7 @@
                         @endif
                         @if($config && $config->instagram)
                             <a href="{{ $config->instagram }}" target="_blank"
-                                class="w-10 h-10 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full flex items-center justify-center text-white hover:from-pink-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-110 hover:shadow-lg">
+                                class="w-10 h-10 bg-gradient-to-r from-pink-600 to-blue-600 rounded-full flex items-center justify-center text-white hover:from-pink-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-110 hover:shadow-lg">
                                 <i class="fab fa-instagram"></i>
                             </a>
                         @endif
@@ -309,7 +309,7 @@
                 <div>
                     <h3 class="text-lg font-semibold text-white mb-6 flex items-center">
                         <div
-                            class="w-1 h-6 bg-gradient-to-b from-purple-400 to-purple-600 rounded-full {{ app()->getLocale() == 'ar' ? 'ml-3' : 'mr-3' }}">
+                            class="w-1 h-6 bg-gradient-to-b from-blue-400 to-blue-600 rounded-full {{ app()->getLocale() == 'ar' ? 'ml-3' : 'mr-3' }}">
                         </div>
                         {{ __('message.nav_quick_links') }}
                     </h3>
@@ -318,7 +318,7 @@
                             <a href="{{ route('portfolio.about') }}"
                                 class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
                                 <i
-                                    class="fas fa-chevron-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }} text-xs text-purple-400 opacity-0 group-hover:opacity-100 transition-all duration-300 {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
+                                    class="fas fa-chevron-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }} text-xs text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300 {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
                                 {{ __('message.about') }}
                             </a>
                         </li>
@@ -326,7 +326,7 @@
                             <a href="{{ route('portfolio.projects') }}"
                                 class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
                                 <i
-                                    class="fas fa-chevron-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }} text-xs text-purple-400 opacity-0 group-hover:opacity-100 transition-all duration-300 {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
+                                    class="fas fa-chevron-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }} text-xs text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300 {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
                                 {{ __('message.projects') }}
                             </a>
                         </li>
@@ -334,7 +334,7 @@
                             <a href="{{ route('portfolio.experiences') }}"
                                 class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
                                 <i
-                                    class="fas fa-chevron-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }} text-xs text-purple-400 opacity-0 group-hover:opacity-100 transition-all duration-300 {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
+                                    class="fas fa-chevron-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }} text-xs text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300 {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
                                 {{ __('message.experiences') }}
                             </a>
                         </li>
@@ -342,7 +342,7 @@
                             <a href="{{ route('portfolio.contact') }}"
                                 class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
                                 <i
-                                    class="fas fa-chevron-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }} text-xs text-purple-400 opacity-0 group-hover:opacity-100 transition-all duration-300 {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
+                                    class="fas fa-chevron-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }} text-xs text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300 {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
                                 {{ __('message.contact') }}
                             </a>
                         </li>
@@ -353,7 +353,7 @@
                 <div>
                     <h3 class="text-lg font-semibold text-white mb-6 flex items-center">
                         <div
-                            class="w-1 h-6 bg-gradient-to-b from-purple-400 to-purple-600 rounded-full {{ app()->getLocale() == 'ar' ? 'ml-3' : 'mr-3' }}">
+                            class="w-1 h-6 bg-gradient-to-b from-blue-400 to-blue-600 rounded-full {{ app()->getLocale() == 'ar' ? 'ml-3' : 'mr-3' }}">
                         </div>
                         {{ __('message.contact_info') }}
                     </h3>
@@ -361,7 +361,7 @@
                         @if($config && $config->email)
                             <li class="flex items-center text-gray-300 group">
                                 <div
-                                    class="w-8 h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center {{ app()->getLocale() == 'ar' ? 'ml-3' : 'mr-3' }} group-hover:from-purple-600 group-hover:to-purple-700 transition-all duration-300">
+                                    class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center {{ app()->getLocale() == 'ar' ? 'ml-3' : 'mr-3' }} group-hover:from-blue-600 group-hover:to-blue-700 transition-all duration-300">
                                     <i class="fas fa-envelope text-sm text-white"></i>
                                 </div>
                                 <span
@@ -395,8 +395,15 @@
             <!-- Bottom Section -->
             <div class="border-t border-gray-700/50 pt-8">
                 <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-400 text-sm mb-4 md:mb-0">
-                        {{ ($config && $config->copyright) ? $config->copyright : '© ' . date('Y') . ' All rights reserved.' }}
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+                        {{ ($config && $config->copyright)
+                            ? (app()->getLocale() == 'ar'
+                                ? $config->copyright_ar ?? $config->copyright
+                                : $config->copyright_en ?? $config->copyright)
+                            : (app()->getLocale() == 'ar'
+                                ? '© ' . date('Y') . ' جميع الحقوق محفوظة.'
+                                : '© ' . date('Y') . ' All rights reserved.')
+                        }}
                     </p>
                     <div
                         class="flex items-center {{ app()->getLocale() == 'ar' ? 'space-x-reverse space-x-6' : 'space-x-6' }} text-sm text-gray-400">

@@ -27,7 +27,8 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->string('profile_image')->nullable();
             $table->string('cv')->nullable();
-            $table->string('copyright')->nullable();
+            $table->string('copyright_ar')->nullable();
+            $table->string('copyright_en')->nullable();
             $table->string('site_name')->nullable();
             $table->string('site_description')->nullable();
             $table->text('site_keywords')->nullable();

@@ -10,7 +10,7 @@ class ConfigSeeder extends Seeder
     public function run(): void
     {
         Config::create([
-            'name_ar' => 'عبد الرحمن الغونيمي',
+            'name_ar' => 'عبد الرحمن الغنيمي',
             'name_en' => 'Abdelrahman Elghonemy',
             'job_title_ar' => 'مطور ويب متكامل ومهندس برمجيات',
             'job_title_en' => 'Full Stack Developer & Software Engineer',
@@ -24,7 +24,8 @@ class ConfigSeeder extends Seeder
             'site_name' => 'Abdelrahman Elghonemy Portfolio',
             'site_description' => 'Portfolio احترافي لمطور ويب متكامل ومهندس برمجيات متخصص في Laravel، PHP، Python، و C#',
             'site_keywords' => 'full stack developer, software engineer, laravel, php, python, c#, javascript, web development, e-commerce, cms, portfolio',
-            'copyright' => '© ' . date('Y') . ' Abdelrahman Elghonemy. All rights reserved.',
+            'copyright_en' => '© ' . date('Y') . ' Abdelrahman Elghonemy. All rights reserved.',
+            'copyright_ar' => '© ' . date('Y') . ' عبد الرحمن الغنيمي. جميع الحقوق محفوظة.',
             'facebook' => 'https://facebook.com/abdelrahman.elghonemy',
             'twitter' => 'https://twitter.com/abdelrahman_elg',
             'instagram' => 'https://instagram.com/abdelrahman.elghonemy',
