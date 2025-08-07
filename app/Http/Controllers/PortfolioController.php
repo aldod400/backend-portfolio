@@ -6,7 +6,11 @@ use App\Models\Config;
 use App\Models\Experience;
 use App\Models\Project;
 use App\Models\Skill;
+use App\Models\Education;
+use App\Models\Certification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class PortfolioController extends Controller
 {
@@ -66,8 +70,10 @@ class PortfolioController extends Controller
     public function about()
     {
         $config = Config::first();
+        $educations = Education::orderBy('start_date', 'desc')->get();
+        $certifications = Certification::orderBy('issue_date', 'desc')->get();
 
-        return view('portfolio.about', compact('config'));
+        return view('portfolio.about', compact('config', 'educations', 'certifications'));
     }
 
     public function contact()
@@ -75,5 +81,40 @@ class PortfolioController extends Controller
         $config = Config::first();
 
         return view('portfolio.contact', compact('config'));
+    }
+
+    public function education()
+    {
+        $config = Config::first();
+        $educations = Education::orderBy('start_date', 'desc')->get();
+
+        return view('portfolio.education', compact('config', 'educations'));
+    }
+
+    public function certifications()
+    {
+        $config = Config::first();
+        $certifications = Certification::orderBy('issue_date', 'desc')->get();
+
+        return view('portfolio.certifications', compact('config', 'certifications'));
+    }
+
+    public function downloadCV()
+    {
+        $config = Config::first();
+
+        if (!$config || !$config->cv) {
+            abort(404, 'CV not found');
+        }
+
+        $filePath = storage_path('app/public/' . $config->cv);
+
+        if (!file_exists($filePath)) {
+            abort(404, 'CV file not found');
+        }
+
+        $fileName = 'CV_' . str_replace(' ', '_', $config->name_en) . '.pdf';
+
+        return Storage::disk('public')->download($config->cv, $fileName);
     }
 }

@@ -2,6 +2,41 @@
 
 @section('title', (app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en) . ' - ' . ($config->site_name ?? 'Portfolio'))
 
+@push('styles')
+<style>
+    /* Image hover effects */
+    .image-card {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .image-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    
+    /* Modal improvements */
+    #modalImage {
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+    }
+    
+    /* Responsive image containers */
+    .image-container {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    }
+    
+    .dark .image-container {
+        background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    }
+</style>
+@endpush
+
 @section('content')
     <!-- Project Header -->
     <section class="gradient-bg py-20">
@@ -83,7 +118,7 @@
 
                     <div>
                         @if($project->images->first())
-                            <img src="{{ asset('storage/' . $project->images->first()->image_path) }}"
+                            <img src="{{ asset('storage/' . $project->images->first()->image) }}"
                                 alt="{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}"
                                 class="w-full rounded-xl shadow-2xl">
                         @else
@@ -105,14 +140,24 @@
                     {{ app()->getLocale() == 'ar' ? 'معرض الصور' : 'Project Gallery' }}
                 </h2>
 
+                <!-- Responsive Grid Layout -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach($project->images as $image)
-                        <div class="rounded-lg overflow-hidden shadow-lg card-hover" data-aos="fade-up"
-                            data-aos-delay="{{ $loop->index * 100 }}">
-                            <img src="{{ asset('storage/' . $image->image_path) }}"
-                                alt="{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}"
-                                class="w-full h-64 object-cover cursor-pointer"
-                                onclick="openImageModal('{{ asset('storage/' . $image->image_path) }}')">
+                        <div class="group image-card rounded-lg overflow-hidden shadow-lg aspect-video bg-gray-100 dark:bg-gray-800 cursor-pointer" data-aos="fade-up"
+                            data-aos-delay="{{ $loop->index * 100 }}" onclick="openImageModal('{{ asset('storage/' . $image->image) }}')">
+                            <div class="image-container relative w-full h-full">
+                                <img src="{{ asset('storage/' . $image->image) }}"
+                                    alt="{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}"
+                                    class="w-full h-full object-contain group-hover:object-cover transition-all duration-500 relative z-10"
+                                    style="pointer-events: none;">
+                                
+                                <!-- Overlay with zoom icon -->
+                                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
+                                    <div class="text-white text-2xl transform scale-75 group-hover:scale-100 transition-transform duration-300">
+                                        <i class="fas fa-expand-arrows-alt"></i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     @endforeach
                 </div>
@@ -229,7 +274,7 @@
                         <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg overflow-hidden card-hover" data-aos="fade-up"
                             data-aos-delay="{{ $loop->index * 100 }}">
                             @if($relatedProject->images->first())
-                                <img src="{{ asset('storage/' . $relatedProject->images->first()->image_path) }}"
+                                <img src="{{ asset('storage/' . $relatedProject->images->first()->image) }}"
                                     alt="{{ app()->getLocale() == 'ar' ? $relatedProject->title_ar : $relatedProject->title_en }}"
                                     class="w-full h-48 object-cover">
                             @else
@@ -259,20 +304,69 @@
         </section>
     @endif
 
-    <!-- Image Modal -->
-    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden flex items-center justify-center p-4">
-        <div class="relative max-w-4xl max-h-full">
-            <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg">
-            <button onclick="closeImageModal()" class="absolute top-4 right-4 text-white hover:text-gray-300 text-2xl">
+    <!-- Enhanced Image Modal -->
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4">
+        <div class="relative max-w-7xl max-h-full w-full h-full flex items-center justify-center">
+            <!-- Loading Spinner -->
+            <div id="imageLoader" class="absolute inset-0 flex items-center justify-center">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+            </div>
+            
+            <!-- Main Image -->
+            <img id="modalImage" src="" alt="" 
+                 class="max-w-full max-h-full object-contain rounded-lg shadow-2xl opacity-0 transition-opacity duration-300"
+                 onload="this.style.opacity=1; document.getElementById('imageLoader').style.display='none'">
+            
+            <!-- Controls -->
+            <button onclick="closeImageModal()" 
+                    class="absolute top-4 right-4 w-10 h-10 bg-black bg-opacity-50 hover:bg-opacity-75 text-white rounded-full flex items-center justify-center text-xl transition-all duration-300">
                 <i class="fas fa-times"></i>
             </button>
+            
+            <!-- Download Button -->
+            <button onclick="downloadImage()" 
+                    class="absolute top-4 left-4 w-10 h-10 bg-black bg-opacity-50 hover:bg-opacity-75 text-white rounded-full flex items-center justify-center text-lg transition-all duration-300">
+                <i class="fas fa-download"></i>
+            </button>
+            
+            <!-- Zoom Controls -->
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                <button onclick="zoomImage('in')" 
+                        class="w-10 h-10 bg-black bg-opacity-50 hover:bg-opacity-75 text-white rounded-full flex items-center justify-center transition-all duration-300">
+                    <i class="fas fa-search-plus"></i>
+                </button>
+                <button onclick="zoomImage('out')" 
+                        class="w-10 h-10 bg-black bg-opacity-50 hover:bg-opacity-75 text-white rounded-full flex items-center justify-center transition-all duration-300">
+                    <i class="fas fa-search-minus"></i>
+                </button>
+                <button onclick="resetZoom()" 
+                        class="w-10 h-10 bg-black bg-opacity-50 hover:bg-opacity-75 text-white rounded-full flex items-center justify-center transition-all duration-300">
+                    <i class="fas fa-undo"></i>
+                </button>
+            </div>
         </div>
     </div>
 
     @push('scripts')
         <script>
+            let currentZoom = 1;
+            let currentImageSrc = '';
+
+            // Debug function
+            console.log('Image modal script loaded');
+
             function openImageModal(imageSrc) {
-                document.getElementById('modalImage').src = imageSrc;
+                console.log('Opening modal with image:', imageSrc);
+                currentImageSrc = imageSrc;
+                const modalImage = document.getElementById('modalImage');
+                const imageLoader = document.getElementById('imageLoader');
+                
+                // Reset image and show loader
+                modalImage.style.opacity = '0';
+                imageLoader.style.display = 'flex';
+                resetZoom();
+                
+                modalImage.src = imageSrc;
                 document.getElementById('imageModal').classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             }
@@ -280,6 +374,39 @@
             function closeImageModal() {
                 document.getElementById('imageModal').classList.add('hidden');
                 document.body.style.overflow = 'auto';
+                currentImageSrc = '';
+                resetZoom();
+            }
+
+            function downloadImage() {
+                if (currentImageSrc) {
+                    const link = document.createElement('a');
+                    link.href = currentImageSrc;
+                    link.download = 'project-image.jpg';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+            }
+
+            function zoomImage(direction) {
+                const modalImage = document.getElementById('modalImage');
+                
+                if (direction === 'in') {
+                    currentZoom = Math.min(currentZoom * 1.2, 3);
+                } else {
+                    currentZoom = Math.max(currentZoom / 1.2, 0.5);
+                }
+                
+                modalImage.style.transform = `scale(${currentZoom})`;
+                modalImage.style.cursor = currentZoom > 1 ? 'move' : 'default';
+            }
+
+            function resetZoom() {
+                currentZoom = 1;
+                const modalImage = document.getElementById('modalImage');
+                modalImage.style.transform = 'scale(1)';
+                modalImage.style.cursor = 'default';
             }
 
             // Close modal when clicking outside
@@ -293,6 +420,48 @@
             document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape') {
                     closeImageModal();
+                }
+            });
+
+            // Zoom with mouse wheel
+            document.getElementById('modalImage').addEventListener('wheel', function(e) {
+                e.preventDefault();
+                if (e.deltaY < 0) {
+                    zoomImage('in');
+                } else {
+                    zoomImage('out');
+                }
+            });
+
+            // Pan functionality when zoomed
+            let isPanning = false;
+            let startX, startY, initialX = 0, initialY = 0;
+
+            document.getElementById('modalImage').addEventListener('mousedown', function(e) {
+                if (currentZoom > 1) {
+                    isPanning = true;
+                    startX = e.clientX - initialX;
+                    startY = e.clientY - initialY;
+                    this.style.cursor = 'grabbing';
+                }
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (isPanning && currentZoom > 1) {
+                    e.preventDefault();
+                    initialX = e.clientX - startX;
+                    initialY = e.clientY - startY;
+                    
+                    const modalImage = document.getElementById('modalImage');
+                    modalImage.style.transform = `scale(${currentZoom}) translate(${initialX/currentZoom}px, ${initialY/currentZoom}px)`;
+                }
+            });
+
+            document.addEventListener('mouseup', function() {
+                if (isPanning) {
+                    isPanning = false;
+                    const modalImage = document.getElementById('modalImage');
+                    modalImage.style.cursor = currentZoom > 1 ? 'move' : 'default';
                 }
             });
         </script>

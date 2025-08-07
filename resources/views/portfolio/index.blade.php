@@ -26,6 +26,11 @@
                             class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-all">
                             {{ __('message.contact_me') }}
                         </a>
+                        <a href="{{ route('portfolio.downloadCV') }}" target="_blank"
+                            class="bg-green-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-green-600 transition-all shadow-lg">
+                            <i class="fas fa-download {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
+                            {{ app()->getLocale() == 'ar' ? 'تحميل السيرة الذاتية' : 'Download CV' }}
+                        </a>
                     </div>
                 </div>
 
@@ -35,7 +40,7 @@
                             <img src="{{ asset('storage/' . $config->profile_image) }}"
                                 alt="{{ $config->name_ar ?? $config->name_en }}"
                                 class="w-80 h-80 rounded-full object-cover shadow-2xl border-8 border-white/20">
-                            <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-400/20 to-white/20">
+                            <div class="inset-0 rounded-full bg-gradient-to-tr from-blue-400/20 to-white/20">
                             </div>
                         </div>
                     @else

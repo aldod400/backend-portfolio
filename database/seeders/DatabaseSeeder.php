@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             SkillSeeder::class,
             ExperienceSeeder::class,
             ProjectSeeder::class,
+            EducationSeeder::class,
+            CertificationSeeder::class,
         ]);
     }
 }

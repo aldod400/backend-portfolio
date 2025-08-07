@@ -14,9 +14,18 @@
                     <h2 class="text-2xl mb-6 text-blue-200">
                         {{ app()->getLocale() == 'ar' ? ($config->name_ar ?? '') : ($config->name_en ?? '') }}
                     </h2>
-                    <p class="text-xl text-blue-100 leading-relaxed">
+                    <p class="text-xl text-blue-100 leading-relaxed mb-8">
                         {{ app()->getLocale() == 'ar' ? ($config->job_title_ar ?? '') : ($config->job_title_en ?? '') }}
                     </p>
+                    
+                    <!-- CV Download Button -->
+                    <div class="flex {{ app()->getLocale() == 'ar' ? 'justify-end' : 'justify-start' }}">
+                        <a href="{{ route('portfolio.downloadCV') }}" target="_blank"
+                           class="inline-flex items-center bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                            <i class="fas fa-download {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
+                            {{ app()->getLocale() == 'ar' ? 'تحميل السيرة الذاتية' : 'Download CV' }}
+                        </a>
+                    </div>
                 </div>
 
                 <div class="text-center" data-aos="fade-left">
@@ -242,7 +251,7 @@
                                 <p class="text-gray-600 dark:text-gray-300 mb-4">
                                     {{ __('message.get_resume_copy') }}
                                 </p>
-                                <a href="{{ asset('storage/' . $config->cv) }}" target="_blank"
+                                <a href="{{ route('portfolio.downloadCV') }}"
                                     class="bg-gradient-to-r from-blue-600 to-blue-600 hover:from-blue-700 hover:to-blue-700 text-white px-6 py-3 rounded-full font-semibold transition-all inline-block transform hover:scale-105 shadow-lg">
                                     <i class="fas fa-download {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
                                     {{ __('message.download_cv') }}

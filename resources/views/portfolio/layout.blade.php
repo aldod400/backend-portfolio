@@ -105,6 +105,24 @@
         * {
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
+
+        /* Portfolio Dropdown Styles */
+        .dropdown-menu {
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .group:hover .dropdown-menu {
+            transform: translateY(0);
+        }
+        
+        .dropdown-arrow {
+            transition: transform 0.3s ease;
+        }
+        
+        .group:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
     </style>
 
     @stack('styles')
@@ -127,7 +145,7 @@
                 </div>
 
                 <div
-                    class="hidden md:flex items-center {{ app()->getLocale() == 'ar' ? 'space-x-reverse space-x-8' : 'space-x-8' }}">
+                    class="hidden md:flex items-center {{ app()->getLocale() == 'ar' ? 'space-x-reverse space-x-6' : 'space-x-6' }}">
                     <a href="{{ route('portfolio.index') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                         {{ __('message.home') }}
@@ -136,18 +154,54 @@
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                         {{ __('message.about') }}
                     </a>
-                    <a href="{{ route('portfolio.experiences') }}"
-                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
-                        {{ __('message.experiences') }}
-                    </a>
-                    <a href="{{ route('portfolio.projects') }}"
-                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
-                        {{ __('message.projects') }}
-                    </a>
-                    <a href="{{ route('portfolio.skills') }}"
-                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
-                        {{ __('message.skills') }}
-                    </a>
+                    
+                    <!-- Portfolio Dropdown -->
+                    <div class="relative group">
+                        <button class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium flex items-center">
+                            {{ __('message.portfolio') }}
+                            <i class="fas fa-chevron-down text-xs {{ app()->getLocale() == 'ar' ? 'mr-1' : 'ml-1' }} dropdown-arrow"></i>
+                        </button>
+                        
+                        <div class="dropdown-menu absolute {{ app()->getLocale() == 'ar' ? 'right-0' : 'left-0' }} mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900/50 border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible z-50">
+                            <div class="p-2">
+                                <a href="{{ route('portfolio.experiences') }}" 
+                                   class="flex items-center px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 rounded-md transition-colors">
+                                    <i class="fas fa-briefcase text-blue-500 {{ app()->getLocale() == 'ar' ? 'ml-3' : 'mr-3' }} w-4"></i>
+                                    {{ __('message.experiences') }}
+                                </a>
+                                <a href="{{ route('portfolio.education') }}" 
+                                   class="flex items-center px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 rounded-md transition-colors">
+                                    <i class="fas fa-graduation-cap text-green-500 {{ app()->getLocale() == 'ar' ? 'ml-3' : 'mr-3' }} w-4"></i>
+                                    {{ __('message.education') }}
+                                </a>
+                                <a href="{{ route('portfolio.certifications') }}" 
+                                   class="flex items-center px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 rounded-md transition-colors">
+                                    <i class="fas fa-certificate text-blue-500 {{ app()->getLocale() == 'ar' ? 'ml-3' : 'mr-3' }} w-4"></i>
+                                    {{ __('message.certifications') }}
+                                </a>
+                                <div class="border-t border-gray-200 dark:border-gray-600 my-2"></div>
+                                <a href="{{ route('portfolio.projects') }}" 
+                                   class="flex items-center px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 rounded-md transition-colors">
+                                    <i class="fas fa-code text-orange-500 {{ app()->getLocale() == 'ar' ? 'ml-3' : 'mr-3' }} w-4"></i>
+                                    {{ __('message.projects') }}
+                                </a>
+                                <a href="{{ route('portfolio.skills') }}" 
+                                   class="flex items-center px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 rounded-md transition-colors">
+                                    <i class="fas fa-tools text-red-500 {{ app()->getLocale() == 'ar' ? 'ml-3' : 'mr-3' }} w-4"></i>
+                                    {{ __('message.skills') }}
+                                </a>
+                                
+                                <!-- CV Download -->
+                                <div class="border-t border-gray-200 dark:border-gray-600 my-1"></div>
+                                <a href="{{ route('portfolio.downloadCV') }}" target="_blank"
+                                   class="flex items-center px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 rounded-md transition-colors">
+                                    <i class="fas fa-download text-green-500 {{ app()->getLocale() == 'ar' ? 'ml-3' : 'mr-3' }} w-4"></i>
+                                    {{ app()->getLocale() == 'ar' ? 'تحميل السيرة الذاتية' : 'Download CV' }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <a href="{{ route('portfolio.contact') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                         {{ __('message.contact') }}
@@ -155,14 +209,14 @@
 
                     <!-- Language Switch -->
                     <div
-                        class="flex items-center {{ app()->getLocale() == 'ar' ? 'space-x-reverse space-x-2' : 'space-x-2' }}">
+                        class="flex items-center {{ app()->getLocale() == 'ar' ? 'space-x-reverse space-x-1' : 'space-x-1' }}">
                         <a href="{{ route('lang.switch', 'ar') }}"
-                            class="px-2 py-1 rounded {{ app()->getLocale() == 'ar' ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400' }} transition-colors text-sm font-medium">
-                            {{ __('message.arabic') }}
+                            class="px-2 py-1 rounded text-xs {{ app()->getLocale() == 'ar' ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400' }} transition-colors font-medium">
+                            {{ __('message.arabic') }}    
                         </a>
-                        <span class="text-gray-400">|</span>
+                        <span class="text-gray-400 text-xs">|</span>
                         <a href="{{ route('lang.switch', 'en') }}"
-                            class="px-2 py-1 rounded {{ app()->getLocale() == 'en' ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400' }} transition-colors text-sm font-medium">
+                            class="px-2 py-1 rounded text-xs {{ app()->getLocale() == 'en' ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400' }} transition-colors font-medium">
                             {{ __('message.english') }}
                         </a>
                     </div>
@@ -170,8 +224,8 @@
                     <!-- Dark Mode Toggle -->
                     <button onclick="toggleDarkMode()"
                         class="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                        <i class="fas fa-moon dark:hidden text-lg"></i>
-                        <i class="fas fa-sun hidden dark:block text-lg"></i>
+                        <i class="fas fa-moon dark:hidden text-sm"></i>
+                        <i class="fas fa-sun hidden dark:block text-sm"></i>
                     </button>
                 </div>
 
@@ -209,6 +263,14 @@
                     class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                     {{ __('message.experiences') }}
                 </a>
+                <a href="{{ route('portfolio.education') }}"
+                    class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
+                    {{ __('message.education') }}
+                </a>
+                <a href="{{ route('portfolio.certifications') }}"
+                    class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
+                    {{ __('message.certifications') }}
+                </a>
                 <a href="{{ route('portfolio.projects') }}"
                     class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                     {{ __('message.projects') }}
@@ -217,6 +279,15 @@
                     class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                     {{ __('message.skills') }}
                 </a>
+                
+                <!-- CV Download Mobile -->
+                <div class="border-t border-gray-200 dark:border-gray-600 my-2"></div>
+                <a href="{{ route('portfolio.downloadCV') }}" target="_blank"
+                    class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors font-medium">
+                    <i class="fas fa-download {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
+                    {{ app()->getLocale() == 'ar' ? 'تحميل السيرة الذاتية' : 'Download CV' }}
+                </a>
+                
                 <a href="{{ route('portfolio.contact') }}"
                     class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                     {{ __('message.contact') }}
@@ -339,6 +410,22 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ route('portfolio.education') }}"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }} text-xs text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300 {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
+                                {{ __('message.education') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('portfolio.certifications') }}"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }} text-xs text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300 {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
+                                {{ __('message.certifications') }}
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route('portfolio.contact') }}"
                                 class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
                                 <i
@@ -396,14 +483,9 @@
             <div class="border-t border-gray-700/50 pt-8">
                 <div class="flex flex-col md:flex-row justify-between items-center">
                     <p class="text-gray-400 text-sm mb-4 md:mb-0" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
-                        {{ ($config && $config->copyright)
-                            ? (app()->getLocale() == 'ar'
-                                ? $config->copyright_ar ?? $config->copyright
-                                : $config->copyright_en ?? $config->copyright)
-                            : (app()->getLocale() == 'ar'
-                                ? '© ' . date('Y') . ' جميع الحقوق محفوظة.'
-                                : '© ' . date('Y') . ' All rights reserved.')
-                        }}
+                        {{ $config && app()->getLocale() == 'ar' ? 
+                        $config->copyright_ar : $config->copyright_en 
+                            }}
                     </p>
                     <div
                         class="flex items-center {{ app()->getLocale() == 'ar' ? 'space-x-reverse space-x-6' : 'space-x-6' }} text-sm text-gray-400">

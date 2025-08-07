@@ -26,7 +26,7 @@
                         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden card-hover" data-aos="fade-up"
                             data-aos-delay="{{ $loop->index * 100 }}">
                             @if($project->images->first())
-                                <img src="{{ asset('storage/' . $project->images->first()->image_path) }}"
+                                <img src="{{ asset('storage/' . $project->images->first()->image) }}"
                                     alt="{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}"
                                     class="w-full h-48 object-cover">
                             @else
