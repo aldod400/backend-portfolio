@@ -206,4 +206,15 @@ return [
     // CV Download
     'download_cv_desc' => 'Get a complete PDF copy of my resume',
     'download_pdf' => 'Download PDF',
+
+    // Contact Form Validation
+    'name_required' => 'Name is required',
+    'email_required' => 'Email is required',
+    'email_invalid' => 'Email is invalid',
+    'subject_required' => 'Subject is required',
+    'message_required' => 'Message is required',
+
+    // Contact Form Messages
+    'message_sent_successfully' => 'Your message has been sent successfully! I will contact you soon.',
+    'message_send_failed' => 'An error occurred while sending the message. Please try again.',
 ];

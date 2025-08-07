@@ -145,7 +145,27 @@
                             {{ __('message.send_message') }}
                         </h2>
 
-                        <form action="#" method="POST" class="space-y-6">
+                        <!-- Success Message -->
+                        @if(session('success'))
+                            <div class="mb-6 p-4 bg-green-100 dark:bg-green-900/50 border border-green-300 dark:border-green-700 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-600 dark:text-green-400 {{ app()->getLocale() == 'ar' ? 'ml-3' : 'mr-3' }}"></i>
+                                    <p class="text-green-700 dark:text-green-300 font-medium">{{ session('success') }}</p>
+                                </div>
+                            </div>
+                        @endif
+
+                        <!-- Error Message -->
+                        @if(session('error'))
+                            <div class="mb-6 p-4 bg-red-100 dark:bg-red-900/50 border border-red-300 dark:border-red-700 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-exclamation-circle text-red-600 dark:text-red-400 {{ app()->getLocale() == 'ar' ? 'ml-3' : 'mr-3' }}"></i>
+                                    <p class="text-red-700 dark:text-red-300 font-medium">{{ session('error') }}</p>
+                                </div>
+                            </div>
+                        @endif
+
+                        <form action="{{ route('contact.store') }}" method="POST" class="space-y-6">
                             @csrf
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
@@ -154,8 +174,12 @@
                                         {{ __('message.your_name') }} *
                                     </label>
                                     <input type="text" id="name" name="name" required
-                                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                        value="{{ old('name') }}"
+                                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all @error('name') border-red-500 @enderror"
                                         placeholder="{{ __('message.name_placeholder') }}">
+                                    @error('name')
+                                        <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div>
@@ -164,8 +188,12 @@
                                         {{ __('message.your_email') }} *
                                     </label>
                                     <input type="email" id="email" name="email" required
-                                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                        value="{{ old('email') }}"
+                                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all @error('email') border-red-500 @enderror"
                                         placeholder="{{ __('message.email_placeholder') }}">
+                                    @error('email')
+                                        <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -175,8 +203,12 @@
                                     {{ __('message.subject') }} *
                                 </label>
                                 <input type="text" id="subject" name="subject" required
-                                    class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                    value="{{ old('subject') }}"
+                                    class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all @error('subject') border-red-500 @enderror"
                                     placeholder="{{ __('message.subject_placeholder') }}">
+                                @error('subject')
+                                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div>
@@ -185,8 +217,11 @@
                                     {{ __('message.your_message') }} *
                                 </label>
                                 <textarea id="message" name="message" rows="5" required
-                                    class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-vertical"
-                                    placeholder="{{ __('message.message_placeholder') }}"></textarea>
+                                    class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-vertical @error('message') border-red-500 @enderror"
+                                    placeholder="{{ __('message.message_placeholder') }}">{{ old('message') }}</textarea>
+                                @error('message')
+                                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div>

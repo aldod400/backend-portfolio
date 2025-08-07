@@ -206,4 +206,15 @@ return [
     // CV Download
     'download_cv_desc' => 'احصل على نسخة PDF كاملة من سيرتي الذاتية',
     'download_pdf' => 'تحميل PDF',
+
+    // Contact Form Validation
+    'name_required' => 'الاسم مطلوب',
+    'email_required' => 'البريد الإلكتروني مطلوب',
+    'email_invalid' => 'البريد الإلكتروني غير صحيح',
+    'subject_required' => 'الموضوع مطلوب',
+    'message_required' => 'الرسالة مطلوبة',
+
+    // Contact Form Messages
+    'message_sent_successfully' => 'تم إرسال رسالتك بنجاح! سأتواصل معك قريباً.',
+    'message_send_failed' => 'حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.',
 ];

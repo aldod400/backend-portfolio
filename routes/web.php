@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\ContactController;
 
 // Language Switch Route
 Route::get('/lang/{locale}', [PortfolioController::class, 'changeLanguage'])->name('lang.switch');
@@ -15,4 +16,5 @@ Route::get('/education', [PortfolioController::class, 'education'])->name('portf
 Route::get('/certifications', [PortfolioController::class, 'certifications'])->name('portfolio.certifications');
 Route::get('/about', [PortfolioController::class, 'about'])->name('portfolio.about');
 Route::get('/contact', [PortfolioController::class, 'contact'])->name('portfolio.contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/download-cv', [PortfolioController::class, 'downloadCV'])->name('portfolio.downloadCV');
