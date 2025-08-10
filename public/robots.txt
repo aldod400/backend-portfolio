@@ -1,2 +1,5 @@
 User-agent: *
-Disallow:
+Allow: /
+
+# Sitemap location
+Sitemap: https://abdelrahman.softeks.org/sitemap.xml
